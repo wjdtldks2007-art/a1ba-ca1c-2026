@@ -31,6 +31,14 @@
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%233182F6'/%3E%3Ctext x='50' y='70' font-size='58' font-family='sans-serif' font-weight='bold' fill='white' text-anchor='middle'%3E%E2%82%A9%3C/text%3E%3C/svg%3E" />
 
+<!-- ===================== 홈 화면 앱(PWA) ===================== -->
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="알바계산기" />
+
 <!-- 계산기 구조화 데이터 (구글 검색 노출용) -->
 <script type="application/ld+json">
 {
@@ -328,6 +336,12 @@
     box-shadow:0 8px 24px rgba(0,0,0,.2);z-index:100;transition:all .22s ease;white-space:nowrap;
   }
   .toast.show{opacity:1;transform:translate(-50%,0)}
+
+  /* ---------- 홈 화면 앱(standalone) 전용: 상태바 영역 확보 ---------- */
+  @media (display-mode: standalone){
+    body{padding-top:env(safe-area-inset-top,0px)}
+    body::before{content:"";position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top,0px);background:#090B10;z-index:60}
+  }
 
   :focus-visible{outline:2px solid var(--blue);outline-offset:2px}
   .pc-only{display:none}
@@ -944,6 +958,15 @@
     constants: { MIN_WAGE_2026: MIN_WAGE_2026, WEEKS_PER_MONTH: WEEKS_PER_MONTH, RATE_PENSION: RATE_PENSION, RATE_HEALTH: RATE_HEALTH, RATE_LTC_OF_HEALTH: RATE_LTC_OF_HEALTH, RATE_EMPLOY: RATE_EMPLOY, RATE_FREELANCE: RATE_FREELANCE }
   };
 })();
+</script>
+
+<!-- 서비스 워커 등록: 오프라인에서도 열리고, 홈 화면 앱으로 설치 가능 -->
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("sw.js").catch(function () {});
+    });
+  }
 </script>
 </body>
 </html>
