@@ -2,7 +2,7 @@
    · 페이지(문서)는 항상 네트워크 우선 → 최신 내용을 보여주고, 끊겼을 때만 캐시로 대체
    · 아이콘·매니페스트 같은 정적 파일은 캐시 우선 + 뒤에서 조용히 갱신
    · 캐시 버전(VERSION)을 올리면 예전 캐시는 활성화 때 자동 삭제됩니다. */
-const VERSION = "alba-calc-v1";
+const VERSION = "alba-calc-v2";
 const CACHE = VERSION;
 const PRECACHE = [
   "./",

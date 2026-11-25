@@ -255,17 +255,11 @@
   .row.minus .v{color:var(--ink)}
   .rate{font-size:11.5px;color:var(--sub);font-weight:600;margin-left:4px}
 
-  /* ---------- ad ---------- */
-  .ad-slot{margin:16px 0}
-  .ad-placeholder{
-    background:repeating-linear-gradient(135deg,#FAFBFC,#FAFBFC 10px,#F5F7F9 10px,#F5F7F9 20px);
-    border:1.5px dashed #DDE2E7;border-radius:18px;padding:18px;text-align:center;color:var(--sub);
-  }
-  .ad-placeholder .ad-tag{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.06em;color:#9AA4AE;border:1px solid #DDE2E7;border-radius:4px;padding:1px 5px;margin-bottom:7px;background:#fff}
-  .ad-placeholder p{margin:0;font-size:13px;line-height:1.5}
-  .ad-placeholder strong{color:var(--ink-2);font-weight:700}
-  .ad-placeholder .ad-hint{font-size:11.5px;color:#A6B0BA;margin-top:5px}
-  .ad-placeholder code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;background:#fff;border:1px solid #E5E8EB;border-radius:4px;padding:1px 4px;color:#6B7684}
+  /* ---------- 쿠팡 파트너스 배너 ---------- */
+  .coupang-ad{margin:24px 0 4px;display:flex;flex-direction:column;align-items:center;gap:9px;text-align:center}
+  .coupang-banner{display:flex;justify-content:center;width:100%;max-width:340px;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch}
+  .coupang-banner iframe{border:0}
+  .ad-disclosure{margin:0;max-width:340px;font-size:12px;line-height:1.55;color:#6B7684;letter-spacing:-0.01em}
 
   /* ---------- content / seo ---------- */
   .section{margin-top:8px}
@@ -488,19 +482,6 @@
         </div>
       </section>
 
-      <!-- ===== [광고 삽입 위치 A] 중간 광고 =====
-           · Google AdSense: 광고 단위 코드를 아래 .ad-placeholder 대신 넣으세요.
-           · 쿠팡 파트너스: partners.coupang.com > 링크 생성 > "배너" HTML을 그대로 붙여넣으세요.
-           · 예) <ins class="adsbygoogle" data-ad-client="ca-pub-XXXX" data-ad-slot="XXXX" ...></ins>
-      -->
-      <aside class="ad-slot" aria-label="광고">
-        <div class="ad-placeholder">
-          <span class="ad-tag">AD</span>
-          <p><strong>광고 영역 A</strong> · 애드센스 / 쿠팡 파트너스 코드 삽입 위치</p>
-          <p class="ad-hint">index.html에서 <code>[광고 삽입 위치 A]</code>를 찾아 이 영역을 교체하세요</p>
-        </div>
-      </aside>
-
       <!-- ============ 상세 내역 ============ -->
       <section class="card" aria-label="급여 상세 내역">
         <div class="card-title"><h2>상세 내역</h2><span class="hint">월 환산 4.345주</span></div>
@@ -603,16 +584,15 @@
     </div>
   </section>
 
-  <!-- ===== [광고 삽입 위치 B] 하단 광고 =====
-       · 애드센스 반응형 광고 또는 쿠팡 파트너스 배너를 아래 .ad-placeholder 대신 넣으세요.
-       · 광고 코드를 넣은 뒤에는 이 주석을 지워도 됩니다.
-  -->
-  <aside class="ad-slot" aria-label="광고">
-    <div class="ad-placeholder">
-      <span class="ad-tag">AD</span>
-      <p><strong>광고 영역 B</strong> · 애드센스 / 쿠팡 파트너스 코드 삽입 위치</p>
-      <p class="ad-hint">index.html에서 <code>[광고 삽입 위치 B]</code>를 찾아 이 영역을 교체하세요</p>
+  <!-- ===== 쿠팡 파트너스 다이나믹 배너 ===== -->
+  <aside class="coupang-ad" aria-label="쿠팡 파트너스 광고">
+    <div class="coupang-banner">
+      <script src="https://ads-partners.coupang.com/g.js"></script>
+      <script>
+      new PartnersCoupang.G({"id":1059648,"template":"carousel","trackingCode":"AF4969621","width":"320","height":"100","tsource":""});
+      </script>
     </div>
+    <p class="ad-disclosure">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
   </aside>
 
   <footer>
@@ -620,8 +600,9 @@
     이 계산기의 결과는 참고용 예상치이며, 실제 급여와 다를 수 있습니다.<br />
     2026년 최저임금 고시(고용노동부고시 제2025-47호) · 2026년 건강보험료율(7.19%) · 국민연금 9.5% 기준
     <div class="footer-links">
+      <a href="https://wjdtldks2007-art.github.io/">SIAN STUDIO</a>
       <a href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">맨 위로</a>
-      <span>© 2026 알바 계산기</span>
+      <span>© 2026 SIAN STUDIO</span>
     </div>
   </footer>
 </main>
