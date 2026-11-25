@@ -260,6 +260,7 @@
   .coupang-banner{display:flex;justify-content:center;width:100%;max-width:340px;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch}
   .coupang-banner iframe{border:0}
   .ad-disclosure{margin:0;max-width:340px;font-size:12px;line-height:1.55;color:#6B7684;letter-spacing:-0.01em}
+  @media(max-width:400px){.coupang-banner{width:calc(100% + 16px);margin-left:-8px;margin-right:-8px}}
 
   /* ---------- content / seo ---------- */
   .section{margin-top:8px}
@@ -907,7 +908,7 @@
     }
   });
 
-  /* 모바일 요약 바: 결과 카드가 화면에 보이면 숨김 */
+  /* 모바일 요약 바: 결과 카드나 하단 배너가 화면에 보이면 숨김 */
   (function(){
     var mini = $("mini");
     var resultCard = document.querySelector(".result");
@@ -916,8 +917,18 @@
       resultCard.scrollIntoView({ behavior: "smooth", block: "center" });
     });
     if ("IntersectionObserver" in window) {
+      var seen = { result: false, ad: false };
+      var sync = function(){ mini.classList.toggle("hide", seen.result || seen.ad); };
+      var adBlock = document.querySelector(".coupang-ad");
+      if (adBlock) {
+        new IntersectionObserver(function(entries){
+          entries.forEach(function(e){ seen.ad = e.isIntersecting; });
+          sync();
+        }, { threshold: 0.25 }).observe(adBlock);
+      }
       new IntersectionObserver(function(entries){
-        entries.forEach(function(e){ mini.classList.toggle("hide", e.isIntersecting); });
+        entries.forEach(function(e){ seen.result = e.isIntersecting; });
+        sync();
       }, { threshold: 0.25 }).observe(resultCard);
     } else {
       mini.addEventListener("click", function(){ mini.classList.add("hide"); });
